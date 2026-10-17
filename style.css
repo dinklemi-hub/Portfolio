@@ -1,0 +1,188 @@
+:root {
+    --bg: #07060d;
+    --panel: #0d0b17;
+    --text: #c9f7ff;
+    --accent: #00f0ff;     /* cyan néon */
+    --accent2: #b44bff;    /* violet néon */
+    --muted: #6b6a85;
+    --error: #ff4b7a;
+}
+ 
+* { box-sizing: border-box; }
+ 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+ 
+body {
+    background:
+        radial-gradient(circle at 20% 10%, rgba(180, 75, 255, 0.15), transparent 45%),
+        radial-gradient(circle at 80% 90%, rgba(0, 240, 255, 0.12), transparent 45%),
+        var(--bg);
+    color: var(--text);
+    font-family: "Fira Code", "Cascadia Code", Consolas, "Courier New", monospace;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+ 
+/* Effet vieux écran */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.03) 0,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    z-index: 10;
+}
+ 
+.window {
+    width: 100%;
+    max-width: 900px;
+    height: min(85vh, 700px);
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    border: 1px solid var(--accent2);
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(180, 75, 255, 0.35), 0 0 60px rgba(0, 240, 255, 0.12);
+    overflow: hidden;
+    position: relative;
+}
+
+#astuce {
+    display: none;
+    position: absolute;
+    background: #14112a;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 12px;
+    border-radius: 8px;
+    bottom: 8px;
+    right: 12px;
+    font-size: 13px;
+}
+
+#astuce.visible {display: block;}
+ 
+/* Barre de titre */
+.titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #14112a;
+    border-bottom: 1px solid rgba(180, 75, 255, 0.4);
+}
+ 
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.red { background: #ff5f57; }
+.yellow { background: #febc2e; }
+.green { background: #28c840; }
+ 
+.title {
+    margin-left: 10px;
+    color: var(--muted);
+    font-size: 13px;
+}
+ 
+/* Onglets */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #100d20;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+ 
+.tabs button {
+    font: inherit;
+    font-size: 13px;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 6px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+ 
+.tabs button:hover,
+.tabs button.active {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 12px var(--accent);
+}
+ 
+.tab-help { margin-left: auto; }
+ 
+/* Terminal */
+#terminal {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    cursor: text;
+}
+ 
+#output .line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.55;
+    margin: 0;
+    min-height: 1.55em;
+}
+ 
+.line.cmd { color: var(--text); }
+.line.cmd .prompt { color: var(--accent2); }
+.line.title { color: var(--accent); font-weight: bold; text-shadow: 0 0 8px var(--accent); }
+.line.muted { color: var(--muted); }
+.line.error { color: var(--error); }
+.line.ok { color: #5dffa0; }
+ 
+.prompt-line {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 4px;
+}
+ 
+.prompt {
+    color: var(--accent2);
+    white-space: nowrap;
+}
+ 
+#input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font: inherit;
+    caret-color: var(--accent);
+}
+ 
+/* Scrollbar discrète */
+#terminal::-webkit-scrollbar { width: 8px; }
+#terminal::-webkit-scrollbar-thumb { background: rgba(180, 75, 255, 0.5); border-radius: 4px; }
+ 
+/* Mode Matrix (commande cachée) */
+body.matrix {
+    --accent: #00ff6a;
+    --accent2: #00b347;
+    --text: #aaffcc;
+}
+ 
+@media (max-width: 600px) {
+    body { font-size: 13px; padding: 8px; }
+    .window { height: 92vh; }
+    .prompt { display: none; }
+}

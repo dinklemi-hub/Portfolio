@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Mon Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="scanlines"></div>
+        <main class="window">
+            <header class="titlebar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="title">visiteur@portfolio:~</span>
+            </header>
+
+            <nav class="tabs">
+                <button data-cmd="about">À propos</button>
+                <button data-cmd="projects">Projets</button>
+                <button data-cmd="skills">Skills</button>
+                <button data-cmd="contact">Contact</button>
+                <button data-cmd="help" class="tab-help">?</button>
+            </nav>
+
+            <section id="terminal" aria-live="polite">
+                <div id="output"></div>
+                <div class="prompt-line">
+                    <span class="prompt">visiteur@portfolio:~$</span>
+                    <input id="input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal">
+                </div>
+            </section>
+
+            <div id="astuce">Astuce : tape "clear" pour nettoyer le terminal</div>
+        </main>
+
+        <script src="script.js"></script>
+    </body>
+</html>
